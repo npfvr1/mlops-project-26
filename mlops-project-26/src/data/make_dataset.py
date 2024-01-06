@@ -21,3 +21,6 @@ if __name__ == '__main__':
     torch.save(test_dataset, r'C:\Users\Nima Jalili\Desktop\mlops-project-26-main\mlops-project-26\data\processed\test_dataset.pt')
 
     pass
+
+
+test
