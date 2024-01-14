@@ -46,6 +46,4 @@ def save_data_sets():
 
 
 if __name__ == '__main__':
-    save_data_sets()
-
-            
+    save_data_sets()            
