@@ -1,6 +1,6 @@
 # src
 
-MLOps project
+MLOps project group 26
 
 ## Project structure
 
@@ -14,13 +14,17 @@ The directory structure of the project looks like this:
 │   ├── processed        <- The final, canonical data sets for modeling.
 │   └── raw              <- The original, immutable data dump.
 │
+├── dockerfiles          <- Collection of dockerfiles
+│
 ├── docs                 <- Documentation folder
 │   │
 │   ├── index.md         <- Homepage for your documentation
 │   │
 │   ├── mkdocs.yml       <- Configuration file for mkdocs
 │   │
-│   └── source/          <- Source directory for documentation files
+│   ├── source/          <- Source directory for documentation files
+│   │
+│   └── tests/           <- Documentations for test like coverage
 │
 ├── models               <- Trained and serialized models, model predictions, or model summaries
 │
@@ -34,8 +38,6 @@ The directory structure of the project looks like this:
 ├── requirements.txt     <- The requirements file for reproducing the analysis environment
 |
 ├── requirements_dev.txt <- The requirements file for reproducing the analysis environment
-│
-├── tests                <- Test files
 │
 ├── src  <- Source code for use in this project.
 │   │
@@ -54,6 +56,14 @@ The directory structure of the project looks like this:
 │   │   └── visualize.py
 │   ├── train_model.py   <- script for training the model
 │   └── predict_model.py <- script for predicting from a model
+│
+├── tests
+│   |                    <- Test files
+│   ├── test_data_processed.py  <- Tests various aspects for loading the raw data
+│   │
+│   ├── test_data_raw.py        <- Tests if the raw data is processed correctly
+│   │
+│   └── test_model_data.py      <- Tests the model contstruction 
 │
 └── LICENSE              <- Open-source license if one is chosen
 ```

@@ -1,0 +1,33 @@
+Coverage for .tests/
+
+Name                           Stmts   Miss  Cover
+--------------------------------------------------
+src\__init__.py                    1      0   100%
+src\data\__init__.py               0      0   100%
+src\data\make_dataset.py          18      6    67%
+src\models\__init__.py             0      0   100%
+src\models\model.py               35     17    51%
+tests\__init__.py                  4      0   100%
+tests\test_data_processed.py      15      1    93%
+tests\test_data_raw.py            29      2    93%
+tests\test_model.py               45      0   100%
+--------------------------------------------------
+TOTAL                            147     26    82%
+
+
+
+
+(MLOPSenv) C:\School\Minor\MLOPS\mlops-project-26\mlops-project-26>coverage report -m
+Name                           Stmts   Miss  Cover   Missing
+------------------------------------------------------------
+src\__init__.py                    1      0   100%
+src\data\__init__.py               0      0   100%
+src\data\make_dataset.py          18      6    67%   38-46, 50
+src\models\__init__.py             0      0   100%
+src\models\model.py               35     17    51%   8-9, 14-17, 20-24, 27-31, 34
+tests\__init__.py                  4      0   100%
+tests\test_data_processed.py      15      1    93%   28
+tests\test_data_raw.py            29      2    93%   30-31
+tests\test_model.py               45      0   100%
+------------------------------------------------------------
+TOTAL                            147     26    82%
