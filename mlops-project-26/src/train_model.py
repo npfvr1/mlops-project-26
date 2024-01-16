@@ -100,40 +100,12 @@ def fit(epochs, lr, model, train_loader, val_loader, opt_func=torch.optim.SGD):
         plot_losses(history)
 
     torch.save(model.state_dict(), r'models/checkpoint.pth')
-
-
-class CustomDataset(Dataset):
-    """
-    Custom Dataset to load the processed data.
-    Instanciate with: type in ['train', 'test', 'val']
-    Adapted from https://pytorch.org/tutorials/beginner/basics/data_tutorial.html#creating-a-custom-dataset-for-your-files
-    """
-    def __init__(self, type : str):
-        if type == 'train':
-            self.images, self.labels = torch.load(r'.\data\processed\train_dataset.pt')
-        elif type == 'test':
-            self.images, self.labels = torch.load(r'.\data\processed\test_dataset.pt')
-        elif type == 'val':
-            self.images, self.labels = torch.load(r'.\data\processed\val_dataset.pt')
-        else:
-            raise ValueError("type parameter must be in ['train', 'test', 'val']")
-
-    def __len__(self):
-        return len(self.labels)
-
-    def __getitem__(self, idx):
-        image = self.images[idx, :, :] # maybe add a    , :
-        label = self.labels[idx]
-        return image, label
     
 
 @hydra.main(version_base=None, config_path="../", config_name="config")
 def train(cfg: DictConfig) -> None:
-    #train_ds = CustomDataset(type='train')
-    #test_ds = CustomDataset(type='test')
     train_ds = torch.load(r'.\data\processed\train_dataset.pt')
     test_ds = torch.load(r'.\data\processed\test_dataset.pt')
-    
     train_dl = DataLoader(train_ds,
                           cfg.hyperparameters.batch_size,
                           shuffle=True,
