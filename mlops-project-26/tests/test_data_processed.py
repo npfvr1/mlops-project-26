@@ -22,7 +22,6 @@ def test_dataset_shape_and_type(file_path):
         # Check data type
         assert img.dtype == torch.float32, f"Unexpected data type: {img.dtype}"
 
-
     
 # Run the test
 if __name__ == '__main__':
