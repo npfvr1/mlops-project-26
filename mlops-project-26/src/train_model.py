@@ -3,6 +3,7 @@ from torch.utils.data.dataloader import DataLoader, Dataset
 import hydra
 from omegaconf import DictConfig
 import matplotlib.pyplot as plt
+import wandb
 
 from models.model import ResNet
 
@@ -82,22 +83,23 @@ def fit(epochs, lr, model, train_loader, val_loader, opt_func=torch.optim.SGD):
         # Training Phase 
         model.train()
         train_losses = []
-        i = 0
-        for batch in train_loader:
+        for i, batch in enumerate(train_loader):
             loss = model.training_step(batch)
             train_losses.append(loss)
             loss.backward()
             optimizer.step()
             optimizer.zero_grad()
-            print(len(train_loader), i, len(batch[0]), len(batch[1]))
-            i+=1
+            print(f"Epoch {epoch} - Processing batch {i}/{len(train_loader)}")
         # Validation phase
         result = evaluate(model, val_loader)
         result['train_loss'] = torch.stack(train_losses).mean().item()
         model.epoch_end(epoch, result)
         history.append(result)
-        plot_accuracies(history)
-        plot_losses(history)
+        #plot_accuracies(history)
+        #plot_losses(history)
+        wandb.log({"train_loss": history[-1].get('train_loss'),
+                    "val_loss": history[-1]['val_loss'],
+                    "accuracy": history[-1]['val_acc']})
 
     torch.save(model.state_dict(), r'models/checkpoint.pth')
     
@@ -119,7 +121,14 @@ def train(cfg: DictConfig) -> None:
     train_dl = DeviceDataLoader(train_dl, device)
     test_dl = DeviceDataLoader(test_dl, device)
 
+    wandb.init(project="test",
+               config={"learning_rate": cfg.hyperparameters.lr,
+                       "architecture": "ResNet",
+                       "dataset": "Bird Species",
+                       "epochs": cfg.hyperparameters.epochs,
+                       "batch_size": cfg.hyperparameters.batch_size})
     model = to_device(ResNet(), device)
+    wandb.watch(model, log_freq=10)
     fit(cfg.hyperparameters.epochs,
         cfg.hyperparameters.lr,
         model,
