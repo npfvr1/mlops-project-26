@@ -2,9 +2,9 @@ name: Run testsCI
 
 on:
   push:
-    branches: [main]
+    branches: [main. master]
   pull_request:
-    branches: [main]
+    branches: [main, master]
 
 jobs:
   build:
@@ -26,4 +26,4 @@ jobs:
     - name: Test with pytest
       run: |
         pip install pytest
-        pytest -v
+        pytest tests/
