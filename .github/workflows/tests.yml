@@ -2,9 +2,11 @@ name: "Run tests"
 
 on:
   push:
-    branches: [ master, main ]
+    paths:
+      - 'mlops-project-26/.github/workflows/tests.yml'
   pull_request:
-    branches: [ master, main ]
+    paths:
+      - 'mlops-project-26/.github/workflows/tests.yml'
 
 jobs:
   build:
