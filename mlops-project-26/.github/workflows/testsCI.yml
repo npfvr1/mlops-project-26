@@ -1,14 +1,13 @@
-name: "Run testsCI"
+name: Run testsCI
 
 on:
   push:
-    branches: [ main, main ]
+    branches: [main]
   pull_request:
-    branches: [ main, main ]
+    branches: [main]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -27,4 +26,4 @@ jobs:
     - name: Test with pytest
       run: |
         pip install pytest
-        pytest tests/
+        pytest -v
