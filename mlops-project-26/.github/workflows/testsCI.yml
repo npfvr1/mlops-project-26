@@ -2,9 +2,9 @@ name: "Run testsCI"
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, main ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, main ]
 
 jobs:
   build:
