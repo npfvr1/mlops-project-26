@@ -46,5 +46,6 @@ def save_data_sets():
     torch.save(val_dataset, os.path.join(processed_data_path, 'val_dataset.pt'))
     torch.save(test_dataset, os.path.join(processed_data_path, 'test_dataset.pt'))
 
+
 if __name__ == '__main__':
     save_data_sets()
