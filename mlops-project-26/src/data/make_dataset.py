@@ -13,7 +13,7 @@ def get_transform():
     return transform
 
 def get_data_sets(transform):
-    base_data_path = r'C:\Users\dongz\Desktop\02476\archive'
+    base_data_path = os.path.join(os.getcwd(), 'data', 'raw')
 
     train_dataset = datasets.ImageFolder(
         os.path.join(base_data_path, 'train'), 
@@ -35,7 +35,7 @@ def save_data_sets():
     train_dataset, val_dataset, test_dataset = get_data_sets(transform)
     
     # Define the processed data path
-    processed_data_path = r'C:\Users\dongz\Desktop\02476\mlops-project-26\mlops-project-26\src\data\processed'
+    processed_data_path = os.path.join(os.getcwd(), 'data', 'processed')
     
     # Check if the directory exists, and create it if not
     if not os.path.exists(processed_data_path):

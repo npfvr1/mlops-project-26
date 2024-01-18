@@ -1,0 +1,10 @@
+pillow == 10.2.0
+Python-IO == 0.3
+fastapi == 0.68.0
+uvicorn == 0.15.0
+opencv-python == 4.9.0.80
+tensorflow == 2.15.0
+python-multipart == 0.0.6
+
+#docker build -t my_fastapi_app -f dockerfiles/api.dockerfile .
+#docker run --name mycontainer -p 80:80 my_fast_app
