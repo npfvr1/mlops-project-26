@@ -23,6 +23,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r mlops-project-26/requirements.txt
         pip install -r mlops-project-26/requirements_tests.txt
+        pip install -r mlops-project-26/requirements_dev.txt
     - name: Test with pytest
       run: |
         pip install pytest
