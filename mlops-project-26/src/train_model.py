@@ -1,5 +1,6 @@
+import os
 import torch
-from torch.utils.data.dataloader import DataLoader, Dataset
+from torch.utils.data.dataloader import DataLoader
 import hydra
 from omegaconf import DictConfig
 import matplotlib.pyplot as plt
@@ -60,7 +61,7 @@ def plot_accuracies(history):
     plt.xlabel('epoch')
     plt.ylabel('accuracy')
     plt.title('Accuracy vs. No. of epochs')
-    plt.savefig(r'./reports/figures/accuracy.png')
+    plt.savefig(r'/reports/figures/accuracy.png')
 
 
 def plot_losses(history):
@@ -73,7 +74,7 @@ def plot_losses(history):
     plt.ylabel('loss')
     plt.legend(['Training', 'Validation'])
     plt.title('Loss vs. No. of epochs')
-    plt.savefig(r'./reports/figures/loss.png')
+    plt.savefig(r'/reports/figures/loss.png')
 
 
 def fit(epochs, lr, model, train_loader, val_loader, opt_func=torch.optim.SGD):
@@ -101,13 +102,14 @@ def fit(epochs, lr, model, train_loader, val_loader, opt_func=torch.optim.SGD):
                     "val_loss": history[-1]['val_loss'],
                     "accuracy": history[-1]['val_acc']})
 
-    torch.save(model.state_dict(), r'models/checkpoint.pth')
+    torch.save(model.state_dict(), os.path.join(os.getcwd(), 'models', 'checkpoint.pth'))
     
 
 @hydra.main(version_base=None, config_path="../", config_name="config")
 def train(cfg: DictConfig) -> None:
-    train_ds = torch.load(r'.\data\processed\train_dataset.pt')
-    test_ds = torch.load(r'.\data\processed\test_dataset.pt')
+    processed_data_path  = os.path.join(os.getcwd(), 'data', 'processed')
+    train_ds = torch.load(os.path.join(processed_data_path, 'train_dataset.pt'))
+    test_ds = torch.load(os.path.join(processed_data_path, 'test_dataset.pt'))
     train_dl = DataLoader(train_ds,
                           cfg.hyperparameters.batch_size,
                           shuffle=True,
