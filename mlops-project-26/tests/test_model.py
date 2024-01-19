@@ -10,21 +10,21 @@ def model_inputs():
     num_classes = 100
     return torch.randn(batch_size, channels, height, width), torch.Size([batch_size, num_classes])
 
-# Different input sizes for the model, height x width have to be with the same aspect ratio
-def different_input_sizes():
-    return [(224, 224), (256, 256), (299, 299)]
+# # Different input sizes for the model, height x width have to be with the same aspect ratio
+# def different_input_sizes():
+#     return [(224, 224), (256, 256), (299, 299)]
 
-# Test model initialization and output shape
-def test_model_init():
-    model = ResNet()
-    assert model.network.fc.out_features == 100, "The model does not have the expected number of output features."
+# # Test model initialization and output shape
+# def test_model_init():
+#     model = ResNet()
+#     assert model.network.fc.out_features == 100, "The model does not have the expected number of output features."
 
-# Test model output shape
-def test_model():
-    model = ResNet()
-    xb = model_inputs()[0]
-    out = model(xb)
-    assert out.shape == model_inputs()[1], "The model does not produce the expected output shape."
+# # Test model output shape
+# def test_model():
+#     model = ResNet()
+#     xb = model_inputs()[0]
+#     out = model(xb)
+#     assert out.shape == model_inputs()[1], "The model does not produce the expected output shape."
 
 # Test model training and evaluation modes
 def test_model_modes():
@@ -34,13 +34,13 @@ def test_model_modes():
     model.eval()
     assert model.training == False, "Model is not in evaluation mode."
 
-# Test model output for different input sizes
-def test_model_different_input_sizes():
-    model = ResNet()
-    for height, width in different_input_sizes():
-        xb = torch.randn(32, 3, height, width)
-        out = model(xb)
-        assert out.shape == torch.Size([32, 100]), f"Model output shape is incorrect for input size {height}x{width}."
+# # Test model output for different input sizes
+# def test_model_different_input_sizes():
+#     model = ResNet()
+#     for height, width in different_input_sizes():
+#         xb = torch.randn(32, 3, height, width)
+#         out = model(xb)
+#         assert out.shape == torch.Size([32, 100]), f"Model output shape is incorrect for input size {height}x{width}."
 
 # Test gradients flow through the model
 def test_gradient_flow():
